@@ -1,0 +1,73 @@
+{
+  "name": "Joule",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap-cloud-sdk/http-client": "^4.0.2",
+    "@sap-cloud-sdk/util": "^4.0.2",
+    "@sap/cds": "^8",
+    "@sap/low-code-event-handler": "^1.2.5",
+    "@sap/xsenv": ">=3.3.2 <3.3.3",
+    "@sap/xssec": "^4.8.0",
+    "express": "^4",
+    "hdb": "^0.19.12",
+    "passport": "^0.7.0"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.10.0",
+    "@cap-js/sqlite": "^1",
+    "@sap/dev-cap-tools": "^1.31.0",
+    "axios": "^1.9.0",
+    "chai": "^4.5.0",
+    "chai-as-promised": "^7.1.2",
+    "chai-subset": "^1.6.0",
+    "jest": "^30.0.0",
+    "sqlite3": "^5.1.7"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "start-local": "npm run generate-entry-point && npm run cds-watch",
+    "generate-entry-point": "dev-cap-tools gen-entrypoint",
+    "cds-watch": "cds watch --open",
+    "watch-asset-management-enhanced": "cds watch --open asset-management-enhanced/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-asset-management": "cds watch --open asset-management/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-asset-management-app": "cds watch --open asset-management-app/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-maintenance": "cds watch --open maintenance/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-asset": "cds watch --open asset/webapp/index.html?sap-ui-xx-viewCache=false",
+    "test": "jest",
+    "watch-maintenance-tasks-management": "cds watch --open maintenance-tasks-management/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "cds": {
+    "sql": {
+      "native_hana_associations": false
+    },
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "auth": "xsuaa"
+      },
+      "auth": {
+        "[development]": {
+          "kind": "dummy"
+        },
+        "[production]": {
+          "kind": "xsuaa"
+        }
+      }
+    }
+  },
+  "lcap": true,
+  "sapux": [
+    "app/asset-management-enhanced",
+    "app/asset-management-enhanced",
+    "app/asset-management",
+    "app/asset-management-app",
+    "app/maintenance",
+    "app/asset",
+    "app/maintenance-tasks-management"
+  ]
+}
