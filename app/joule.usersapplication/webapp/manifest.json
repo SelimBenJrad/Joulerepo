@@ -1,7 +1,7 @@
 {
-  "_version": "1.65.0",
+  "_version": "1.60.0",
   "sap.app": {
-    "id": "assetmanagement.asset",
+    "id": "joule.usersapplication",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -13,7 +13,7 @@
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
       "version": "1.18.0",
-      "toolsId": "db6f5ef4-e5f7-4e2f-8c81-6c7e78bb5196"
+      "toolsId": "66b627fe-a19a-4440-9105-ce42fdf4a407"
     },
     "dataSources": {
       "mainService": {
@@ -22,6 +22,19 @@
         "settings": {
           "annotations": [],
           "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "jouleusersapplication-display": {
+          "semanticObject": "jouleusersapplication",
+          "action": "display",
+          "title": "{{jouleusersapplication-display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
         }
       }
     }
@@ -45,7 +58,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.136.1",
+      "minUI5Version": "1.120.13",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -60,7 +73,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "assetmanagement.asset.i18n.i18n"
+          "bundleName": "joule.usersapplication.i18n.i18n"
         }
       },
       "": {
@@ -85,33 +98,28 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "AssetsList",
-          "target": "AssetsList"
+          "name": "UsersList",
+          "target": "UsersList"
         },
         {
-          "pattern": "Assets({key}):?query:",
-          "name": "AssetsObjectPage",
-          "target": "AssetsObjectPage"
-        },
-        {
-          "pattern": "Assets({key})/maintenanceTasks({key2}):?query:",
-          "name": "MaintenanceTasksObjectPage",
-          "target": "MaintenanceTasksObjectPage"
+          "pattern": "Users({key}):?query:",
+          "name": "UsersObjectPage",
+          "target": "UsersObjectPage"
         }
       ],
       "targets": {
-        "AssetsList": {
+        "UsersList": {
           "type": "Component",
-          "id": "AssetsList",
+          "id": "UsersList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Assets",
+              "contextPath": "/Users",
               "variantManagement": "Page",
               "navigation": {
-                "Assets": {
+                "Users": {
                   "detail": {
-                    "route": "AssetsObjectPage"
+                    "route": "UsersObjectPage"
                   }
                 }
               },
@@ -121,37 +129,18 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              },
-              "initialLoad": "Auto"
-            }
-          }
-        },
-        "AssetsObjectPage": {
-          "type": "Component",
-          "id": "AssetsObjectPage",
-          "name": "sap.fe.templates.ObjectPage",
-          "options": {
-            "settings": {
-              "editableHeaderContent": false,
-              "contextPath": "/Assets",
-              "navigation": {
-                "maintenanceTasks": {
-                  "detail": {
-                    "route": "MaintenanceTasksObjectPage"
-                  }
-                }
               }
             }
           }
         },
-        "MaintenanceTasksObjectPage": {
+        "UsersObjectPage": {
           "type": "Component",
-          "id": "MaintenanceTasksObjectPage",
+          "id": "UsersObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Assets/maintenanceTasks"
+              "contextPath": "/Users"
             }
           }
         }

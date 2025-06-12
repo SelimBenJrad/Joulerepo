@@ -39,7 +39,8 @@
     "watch-maintenance": "cds watch --open maintenance/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-asset": "cds watch --open asset/webapp/index.html?sap-ui-xx-viewCache=false",
     "test": "jest",
-    "watch-maintenance-tasks-management": "cds watch --open maintenance-tasks-management/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-maintenance-tasks-management": "cds watch --open maintenance-tasks-management/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-joule.usersapplication": "cds watch --open joule.usersapplication/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "sql": {
@@ -68,6 +69,7 @@
     "app/asset-management-app",
     "app/maintenance",
     "app/asset",
-    "app/maintenance-tasks-management"
+    "app/maintenance-tasks-management",
+    "app/joule.usersapplication"
   ]
 }

@@ -1,0 +1,36 @@
+<Table id="assetTable"
+       items="{
+         path: '/Assets',
+         parameters: {
+           $count: true,
+           $$updateGroupId: 'assetGroup'
+         }
+       }"
+       growing="true" growingThreshold="20">
+  <headerToolbar>
+    <OverflowToolbar>
+      <Button icon="sap-icon://add" press=".onCreate"/>
+      <Button icon="sap-icon://refresh" press=".onRefresh"/>
+      <Button icon="sap-icon://save" press=".onSave" enabled="{= ${appView>/hasUIChanges} }"/>
+      <Button icon="sap-icon://decline" press=".onResetChanges"/>
+    </OverflowToolbar>
+  </headerToolbar>
+  <columns>
+    <Column><Text text="Asset ID"/></Column>
+    <Column><Text text="Name"/></Column>
+    <Column><Text text="Type"/></Column>
+    <Column><Text text="Status"/></Column>
+    <Column><Text text="Actions"/></Column>
+  </columns>
+  <items>
+    <ColumnListItem>
+      <cells>
+        <Input value="{assetId}" editable="false"/>
+        <Input value="{name}" liveChange=".onInputChange"/>
+        <Input value="{type}" liveChange=".onInputChange"/>
+        <Input value="{status}" liveChange=".onInputChange"/>
+        <Button icon="sap-icon://delete" press=".onDelete"/>
+      </cells>
+    </ColumnListItem>
+  </items>
+</Table>

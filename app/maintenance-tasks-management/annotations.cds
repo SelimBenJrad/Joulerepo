@@ -1,4 +1,6 @@
 using jouleSrv as service from '../../srv/service';
+using from '../annotations';
+
 annotate service.MaintenanceTasks with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
@@ -26,6 +28,7 @@ annotate service.MaintenanceTasks with @(
             },
         ],
     },
+    
     UI.Facets : [
         {
             $Type : 'UI.ReferenceFacet',
@@ -33,7 +36,22 @@ annotate service.MaintenanceTasks with @(
             Label : 'General Information',
             Target : '@UI.FieldGroup#GeneratedGroup',
         },
-    ]
+    ],
+    UI.SelectionPresentationVariant #tableView : {
+        $Type : 'UI.SelectionPresentationVariantType',
+        PresentationVariant : {
+            $Type : 'UI.PresentationVariantType',
+            Visualizations : [
+                '@UI.LineItem',
+            ],
+        },
+        SelectionVariant : {
+            $Type : 'UI.SelectionVariantType',
+            SelectOptions : [
+            ],
+        },
+        Text : 'Table View',
+    },
 );
 
 annotate service.MaintenanceTasks with {
@@ -64,5 +82,15 @@ annotate service.MaintenanceTasks with {
             },
         ],
     }
+};
+
+annotate service.Users with @UI.FieldGroup #Main: {
+  $Type: 'UI.FieldGroupType',
+  Data: [
+    { Value: fullName },
+    { Value: email },
+    { Value: role },
+    { Value: isActive }
+  ]
 };
 

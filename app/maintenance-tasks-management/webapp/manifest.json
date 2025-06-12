@@ -102,7 +102,7 @@
           "options": {
             "settings": {
               "contextPath": "/MaintenanceTasks",
-              "variantManagement": "Page",
+              "variantManagement": "Control",
               "navigation": {
                 "MaintenanceTasks": {
                   "detail": {
@@ -116,7 +116,9 @@
                     "type": "ResponsiveTable"
                   }
                 }
-              }
+              },
+              "defaultTemplateAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView",
+              "initialLoad": "Auto"
             }
           }
         },
@@ -127,7 +129,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/MaintenanceTasks"
+              "contextPath": "/MaintenanceTasks",
+              "sectionLayout": "Tabs"
             }
           }
         }

@@ -84,7 +84,8 @@ annotate jouleSrv.MaintenanceTasks with @UI.LineItem: [
   { Value: completedDate },
   { Value: status },
   { Value: technicianNotes },
-  { Label: 'Asset Name', Value: asset.name }
+  { Label: 'Asset Name', Value: asset.name },
+  { Label: 'User', Value: user.fullName }
 ];
 
 annotate jouleSrv.MaintenanceTasks with @UI.SelectionFields: [
@@ -148,3 +149,8 @@ annotate jouleSrv.FailurePredictions with @UI.LineItem: [
 annotate jouleSrv.FailurePredictions with @UI.SelectionFields: [
   predictionId, asset_ID
 ];
+
+annotate jouleSrv.MaintenanceTasks with {
+  user @Common.Text: { $value: user.fullName };
+};
+
