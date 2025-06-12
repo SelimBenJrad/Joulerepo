@@ -27,3 +27,16 @@ service jouleSrv {
 };
 
 }
+
+annotate jouleSrv.MaintenanceTasks with {
+  @UI.ReferenceFacet: {
+    label: 'Assigned User',
+    target: '@UI.FieldGroup#UserDetails'
+  }
+  user @UI.FieldGroup#UserDetails: {
+    fullName,
+    email,
+    role,
+    isActive
+  };
+}
