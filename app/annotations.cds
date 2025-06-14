@@ -89,7 +89,7 @@ annotate jouleSrv.MaintenanceTasks with @UI.LineItem: [
 ];
 
 annotate jouleSrv.MaintenanceTasks with @UI.SelectionFields: [
-  taskId, asset_ID
+  taskId, asset.@name, user.@fullName
 ];
 
 // === DEPRECIATION RECORDS ===

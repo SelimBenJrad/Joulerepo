@@ -6,7 +6,8 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cap-js/hana": "^1",
+    "18": "^0.0.0",
+    "@cap-js/hana": "^1.9.1",
     "@sap-cloud-sdk/http-client": "^4.0.2",
     "@sap-cloud-sdk/util": "^4.0.2",
     "@sap/cds": "^8",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
     "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
     "@sap/dev-cap-tools": "^1.31.0",
     "axios": "^1.9.0",
     "chai": "^4.5.0",
@@ -42,25 +44,20 @@
     "watch-maintenance-tasks-management": "cds watch --open maintenance-tasks-management/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-joule.usersapplication": "cds watch --open joule.usersapplication/webapp/index.html?sap-ui-xx-viewCache=false"
   },
-  "cds": {
-    "sql": {
-      "native_hana_associations": false
-    },
-    "requires": {
-      "[production]": {
-        "db": "hana",
-        "auth": "xsuaa"
+ "cds": {
+  "requires": {
+    "db": {
+      "kind": "hana",
+      "vcap": {
+        "label": "hana",
+        "plan": "hdi-shared"
       },
-      "auth": {
-        "[development]": {
-          "kind": "dummy"
-        },
-        "[production]": {
-          "kind": "xsuaa"
-        }
-      }
+      "name": "Joule-db"
     }
-  },
+  }
+}
+
+,
   "lcap": true,
   "sapux": [
     "app/asset-management-enhanced",

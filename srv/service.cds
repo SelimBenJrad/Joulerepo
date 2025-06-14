@@ -40,3 +40,20 @@ annotate jouleSrv.MaintenanceTasks with {
     isActive
   };
 }
+annotate Joule.MaintenanceTasks with {
+  asset @Common.Text: asset.name;
+};
+annotate jouleSrv.Users with {
+  @UI.ReferenceFacet: {
+    label: 'Maintenance Tasks',
+    target: '@UI.FieldGroup#TaskDetails'
+  }
+  maintenanceTasks @UI.FieldGroup#TaskDetails: {
+    taskName,
+    dueDate,
+    status
+  };
+}
+annotate jouleSrv.MaintenanceTasks with {
+  user @Common.Text: user.fullName;
+};
