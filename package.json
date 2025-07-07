@@ -28,7 +28,9 @@
     "chai-as-promised": "^7.1.2",
     "chai-subset": "^1.6.0",
     "jest": "^30.0.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.29"
   },
   "scripts": {
     "start": "cds-serve",
@@ -42,22 +44,24 @@
     "watch-asset": "cds watch --open asset/webapp/index.html?sap-ui-xx-viewCache=false",
     "test": "jest",
     "watch-maintenance-tasks-management": "cds watch --open maintenance-tasks-management/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-joule.usersapplication": "cds watch --open joule.usersapplication/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-joule.usersapplication": "cds watch --open joule.usersapplication/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-failure": "cds watch --open failure/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy Joule --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   },
- "cds": {
-  "requires": {
-    "db": {
-      "kind": "hana",
-      "vcap": {
-        "label": "hana",
-        "plan": "hdi-shared"
-      },
-      "name": "Joule-db"
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "vcap": {
+          "label": "hana",
+          "plan": "hdi-shared"
+        },
+        "name": "Joule-db"
+      }
     }
-  }
-}
-
-,
+  },
   "lcap": true,
   "sapux": [
     "app/asset-management-enhanced",
@@ -67,6 +71,7 @@
     "app/maintenance",
     "app/asset",
     "app/maintenance-tasks-management",
-    "app/joule.usersapplication"
+    "app/joule.usersapplication",
+    "app/failure"
   ]
 }

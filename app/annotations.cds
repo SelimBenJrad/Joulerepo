@@ -5,11 +5,10 @@ using jouleSrv from '../srv/service.cds';
 annotate jouleSrv.Assets with @UI.HeaderInfo: {
   TypeName: 'Asset',
   TypeNamePlural: 'Assets',
-  Title: { Value: assetId }
+  Title: { Value: ID }
 };
 
 annotate jouleSrv.Assets with {
-  assetId @UI.Identification @Common.Text: { $value: assetId, TextArrangement: #TextOnly };
   name @title: 'Name';
   type @title: 'Type';
   purchaseDate @title: 'Purchase Date';
@@ -23,7 +22,7 @@ annotate jouleSrv.Assets with {
 };
 
 annotate jouleSrv.Assets with @UI.LineItem: [
-  { Value: assetId },
+  { Value: ID },
   { Value: name },
   { Value: type },
   { Value: purchaseDate },
@@ -35,7 +34,7 @@ annotate jouleSrv.Assets with @UI.LineItem: [
 annotate jouleSrv.Assets with @UI.FieldGroup #Main: {
   $Type: 'UI.FieldGroupType',
   Data: [
-    { Value: assetId },
+    { Value: ID },
     { Value: name },
     { Value: type },
     { Value: purchaseDate },
@@ -57,7 +56,7 @@ annotate jouleSrv.Assets with @UI.Facets: [
 ];
 
 annotate jouleSrv.Assets with @UI.SelectionFields: [
-  assetId, name, type
+  ID, name, type
 ];
 
 // === MAINTENANCE TASKS ===
@@ -65,21 +64,20 @@ annotate jouleSrv.Assets with @UI.SelectionFields: [
 annotate jouleSrv.MaintenanceTasks with @UI.HeaderInfo: {
   TypeName: 'Maintenance Task',
   TypeNamePlural: 'Maintenance Tasks',
-  Title: { Value: taskId }
+  Title: { Value: ID }
 };
 
 annotate jouleSrv.MaintenanceTasks with {
-  taskId @UI.Identification @Common.Text: { $value: taskId, TextArrangement: #TextOnly };
   scheduledDate @title: 'Scheduled Date';
   completedDate @title: 'Completed Date';
   status @title: 'Status';
   technicianNotes @title: 'Technician Notes';
-  asset @Common.Text: { $value: asset.assetId, TextArrangement: #TextOnly };
+  asset @Common.Text: { $value: asset.name, UI.TextArrangement: #TextSeparate };
   asset @Common.Label: 'Asset';
 };
 
 annotate jouleSrv.MaintenanceTasks with @UI.LineItem: [
-  { Value: taskId },
+  { Value: ID },
   { Value: scheduledDate },
   { Value: completedDate },
   { Value: status },
@@ -89,8 +87,15 @@ annotate jouleSrv.MaintenanceTasks with @UI.LineItem: [
 ];
 
 annotate jouleSrv.MaintenanceTasks with @UI.SelectionFields: [
-  taskId, asset.@name, user.@fullName
+  ID
 ];
+
+annotate jouleSrv.MaintenanceTasks with {
+  user_ID @Common.Text: {
+    $value: user.fullName,
+    TextArrangement: #TextOnly
+  };
+};
 
 // === DEPRECIATION RECORDS ===
 
@@ -101,16 +106,16 @@ annotate jouleSrv.DepreciationRecords with @UI.HeaderInfo: {
 };
 
 annotate jouleSrv.DepreciationRecords with {
-  recordId @UI.Identification @Common.Text: { $value: recordId, TextArrangement: #TextOnly };
+  ID @UI.Identification @Common.Text: { $value: ID, TextArrangement: #TextOnly };
   periodStart @title: 'Period Start';
   periodEnd @title: 'Period End';
   depreciationAmount @title: 'Depreciation Amount';
-  asset @Common.Text: { $value: asset.assetId, TextArrangement: #TextOnly };
+  asset @Common.Text: { $value: asset.ID, TextArrangement: #TextOnly };
   asset @Common.Label: 'Asset';
 };
 
 annotate jouleSrv.DepreciationRecords with @UI.LineItem: [
-  { Value: recordId },
+  { Value: ID },
   { Value: periodStart },
   { Value: periodEnd },
   { Value: depreciationAmount },
@@ -118,7 +123,7 @@ annotate jouleSrv.DepreciationRecords with @UI.LineItem: [
 ];
 
 annotate jouleSrv.DepreciationRecords with @UI.SelectionFields: [
-  recordId, asset_ID
+  ID, asset_ID
 ];
 
 // === FAILURE PREDICTIONS ===
@@ -126,20 +131,19 @@ annotate jouleSrv.DepreciationRecords with @UI.SelectionFields: [
 annotate jouleSrv.FailurePredictions with @UI.HeaderInfo: {
   TypeName: 'Failure Prediction',
   TypeNamePlural: 'Failure Predictions',
-  Title: { Value: predictionId }
+  Title: { Value: ID }
 };
 
 annotate jouleSrv.FailurePredictions with {
-  predictionId @UI.Identification @Common.Text: { $value: predictionId, TextArrangement: #TextOnly };
+  ID @UI.Identification @Common.Text: { $value: predictionId, TextArrangement: #TextOnly };
   analysisDate @title: 'Analysis Date';
   failureProbability @title: 'Failure Probability';
   algorithmUsed @title: 'Algorithm Used';
-  asset @Common.Text: { $value: asset.assetId, TextArrangement: #TextOnly };
+  asset @Common.Text: { $value: asset.ID, TextArrangement: #TextOnly };
   asset @Common.Label: 'Asset';
 };
 
 annotate jouleSrv.FailurePredictions with @UI.LineItem: [
-  { Value: predictionId },
   { Value: analysisDate },
   { Value: failureProbability },
   { Value: algorithmUsed },
@@ -149,8 +153,18 @@ annotate jouleSrv.FailurePredictions with @UI.LineItem: [
 annotate jouleSrv.FailurePredictions with @UI.SelectionFields: [
   predictionId, asset_ID
 ];
-
 annotate jouleSrv.MaintenanceTasks with {
-  user @Common.Text: { $value: user.fullName };
+  user @Common.Label: 'Assigned User';
 };
+annotate jouleSrv.MaintenanceTasks with {
+  user @Common.Text: user.fullName ;
+};
+annotate jouleSrv.Users with {
+  fullName @UI.Identification @Common.Text: { $value: fullName, TextArrangement: #TextOnly };
+};
+annotate jouleSrv.MaintenanceTasks with {
+  user_ID @Common.Text: { $value: user.fullName, TextArrangement: #TextOnly };
+};
+
+
 

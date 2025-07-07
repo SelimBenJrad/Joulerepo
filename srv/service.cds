@@ -9,37 +9,57 @@ service jouleSrv {
   
   @odata.draft.enabled
   @cds.redirection.target
-  entity MaintenanceTasks as projection on db.MaintenanceTasks {
+ entity MaintenanceTasks as projection on db.MaintenanceTasks {
   *,
-  user // 👈 this exposes the associated user in the OData service
+  user_ID, // 👈 make sure this is explicitly listed
+  user   // 👈 association for dropdown label (via @Common.Text)
 }
 
+
+@cds.redirection.target
   @odata.draft.enabled
   entity DepreciationRecords as projection on db.DepreciationRecords;
 
-  @odata.draft.enabled
-  entity FailurePredictions as projection on db.FailurePredictions;
+ @odata.draft.enabled
+entity FailurePredictions as projection on db.FailurePredictions {
+  analysisDate,
+  failureProbability,
+  algorithmUsed,
+  asset,
+  asset_ID,
+   // 👈 explicitly include the foreign key
+};
+annotate jouleSrv.FailurePredictions with {
+  asset @Common.Text: asset.name;
+};
 
 @odata.draft.enabled
  entity Users as projection on db.Users {
-  *,
+  ID,
+  fullName,
   maintenanceTasks
 };
 
 }
 
-annotate jouleSrv.MaintenanceTasks with {
-  @UI.ReferenceFacet: {
-    label: 'Assigned User',
-    target: '@UI.FieldGroup#UserDetails'
+annotate jouleSrv.MaintenanceTasks with @UI.FieldGroup #GeneralDetails : {
+  Data : [
+    { Value: scheduledDate },
+    { Value: completedDate },
+    { Value: status },
+    { Value: technicianNotes },
+    { Value: user_ID } // 👈 ensures user dropdown shows
+  ]
+};
+
+annotate jouleSrv.MaintenanceTasks with @UI.Facets : [
+  {
+    $Type: 'UI.ReferenceFacet',
+    Label: 'General Information',
+    Target: '@UI.FieldGroup#GeneralDetails'
   }
-  user @UI.FieldGroup#UserDetails: {
-    fullName,
-    email,
-    role,
-    isActive
-  };
-}
+];
+
 annotate Joule.MaintenanceTasks with {
   asset @Common.Text: asset.name;
 };
@@ -54,6 +74,4 @@ annotate jouleSrv.Users with {
     status
   };
 }
-annotate jouleSrv.MaintenanceTasks with {
-  user @Common.Text: user.fullName;
-};
+
