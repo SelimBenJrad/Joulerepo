@@ -14,6 +14,7 @@ service jouleSrv {
   *,
   user_ID, // 👈 make sure this is explicitly listed
   user   // 👈 association for dropdown label (via @Common.Text)
+  emailAddress : String(255);
 }
 
 

@@ -67,6 +67,7 @@ annotate jouleSrv.MaintenanceTasks with @UI.HeaderInfo: {
   TypeName: 'Maintenance Task',
   TypeNamePlural: 'Maintenance Tasks',
   Title: { Value: ID }
+  emailAddress @UI.Identification: [{ position: 40, label: 'User Email Address' }];
 };
 
 annotate jouleSrv.MaintenanceTasks with {
