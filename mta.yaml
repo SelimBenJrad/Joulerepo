@@ -39,9 +39,37 @@ modules:
       - failure.zip
       name: failure
       target-path: resources/
+    - artifacts:
+      - metrics.zip
+      name: metrics
+      target-path: resources/
+    - artifacts:
+      - predective.zip
+      name: predective
+      target-path: resources/
 - name: failure
   type: html5
   path: app/failure
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: metrics
+  type: html5
+  path: app/metrics
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: predective
+  type: html5
+  path: app/predective
   build-parameters:
     build-result: dist
     builder: custom
@@ -83,11 +111,20 @@ resources:
             ProxyType: Internet
             Type: HTTP
             URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: Joule-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
           existing_destinations_policy: update
       version: 1.0.0
     service: destination
     service-name: Joule-destination-service
     service-plan: lite
+  requires:
+  - name: srv-api
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

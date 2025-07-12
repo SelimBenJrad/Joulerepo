@@ -76,6 +76,37 @@ entity AssetMetrics : cuid, managed {
     temperature      : Decimal(5,2);
     vibrationLevel   : Decimal(5,2);
 
-    asset_ID         : UUID;
+    PredictedFailure     : String(3);       // "YES"/"NO" → true/false
+    PredictionConfidence : Decimal(10,8); // e.g. 0.11538883
+
+    asset_ID         : String(36);
     asset            : Association to one Assets on asset_ID = asset.ID;
+}
+
+// ————————————
+// === Analytical Aggregate View ===
+@Aggregation.ApplySupported.Transformations: [
+  'aggregate',
+  'groupby',
+  'filter',
+  'search'
+]
+@Aggregation.ApplySupported.PropertyRestrictions: true
+view AssetMetricsAnalytics as
+  select from AssetMetrics {
+    key asset_ID                          @(Aggregation.ContextDefiningProperties: []),
+    asset.name                            as assetName,
+    @(Aggregation.group: true)
+    cast(year(recordedAt)  as Integer)    as recordedYear,
+    @(Aggregation.group: true)
+   cast(month(recordedAt) as Integer)    as recordedMonth,
+  // Measures
+  @(Aggregation.default: #SUM)
+  operatingHours,
+  @(Aggregation.default: #AVG)
+  temperature,
+  @(Aggregation.default: #AVG)
+  vibrationLevel,
+  @(Aggregation.default: #AVG)
+  PredictionConfidence
 }

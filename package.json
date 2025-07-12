@@ -15,7 +15,9 @@
     "@sap/xsenv": ">=3.3.2 <3.3.3",
     "@sap/xssec": "^4.8.0",
     "express": "^4",
+    "express-basic-auth": "^1.2.1",
     "hdb": "^0.19.12",
+    "nodemailer": "^7.0.5",
     "passport": "^0.7.0"
   },
   "devDependencies": {
@@ -28,9 +30,9 @@
     "chai-as-promised": "^7.1.2",
     "chai-subset": "^1.6.0",
     "jest": "^30.0.0",
-    "sqlite3": "^5.1.7",
+    "mbt": "^1.2.29",
     "rimraf": "^5.0.5",
-    "mbt": "^1.2.29"
+    "sqlite3": "^5.1.7"
   },
   "scripts": {
     "start": "cds-serve",
@@ -48,7 +50,9 @@
     "watch-failure": "cds watch --open failure/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy Joule --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-metrics": "cds watch --open metrics/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-predective": "cds watch --open predective/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -60,7 +64,8 @@
         },
         "name": "Joule-db"
       }
-    }
+    },
+    "server": "srv/server.js"
   },
   "lcap": true,
   "sapux": [
@@ -72,6 +77,8 @@
     "app/asset",
     "app/maintenance-tasks-management",
     "app/joule.usersapplication",
-    "app/failure"
+    "app/failure",
+    "app/metrics",
+    "app/predective"
   ]
 }

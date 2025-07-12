@@ -12,3 +12,5 @@ using from './maintenance-tasks-management/annotations';
 using from './joule.usersapplication/annotations';
 
 using from './failure/annotations';
+
+using from './predective/annotations';

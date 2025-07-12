@@ -1,12 +1,13 @@
 using { Joule as db } from '../db/schema';
-
 service jouleSrv {
 
   @odata.draft.enabled
   @cds.redirection.target
   entity Assets as projection on db.Assets;
 
-  
+  @odata.draft.enabled
+  @cds.redirection.target
+  entity AssetMetrics as projection on db.AssetMetrics;
   @odata.draft.enabled
   @cds.redirection.target
  entity MaintenanceTasks as projection on db.MaintenanceTasks {
@@ -41,6 +42,10 @@ annotate jouleSrv.FailurePredictions with {
 };
 
 }
+ 
+ @odata.draft.enabled
+  @cds.redirection.target
+  entity AssetMetricsAnalyticsSet as projection on db.AssetMetricsAnalytics;
 
 annotate jouleSrv.MaintenanceTasks with @UI.FieldGroup #GeneralDetails : {
   Data : [
@@ -51,6 +56,7 @@ annotate jouleSrv.MaintenanceTasks with @UI.FieldGroup #GeneralDetails : {
     { Value: user_ID } // 👈 ensures user dropdown shows
   ]
 };
+
 
 annotate jouleSrv.MaintenanceTasks with @UI.Facets : [
   {
@@ -74,4 +80,5 @@ annotate jouleSrv.Users with {
     status
   };
 }
+
 
