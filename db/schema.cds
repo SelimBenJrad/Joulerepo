@@ -32,8 +32,7 @@ entity MaintenanceTasks : cuid,managed {
     asset_ID         : String(36); // Changed to match Assets.assetId type
     asset            : Association to one Assets on asset_ID = asset.ID;
     
-    user_ID          : UUID;
-    user             : Association to one Users on user_ID = user.ID;
+    // user_ID and user association removed
 }
 
 

@@ -35,11 +35,10 @@ module.exports = async function(request, next) {
         try {
             await transporter.sendMail({
                 from: process.env.EMAIL_USER,
-                to: 'dhia.djobbi@gmail.com', // Replace with actual recipient
+                to: data.emailAddress, // Use dynamic email address from the new field
                 subject: 'New Maintenance Task Created',
                 text: `A new maintenance task has been created.\n\nTask Details:\n${JSON.stringify(data, null, 2)}`
             });
-            
         } catch (error) {
             console.error('Failed to send email notification:', error);
             // Don't fail the request if email fails
