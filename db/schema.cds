@@ -27,6 +27,7 @@ entity MaintenanceTasks : cuid,managed {
     completedDate    : Date;
     status           : String(20);
     technicianNotes  : String(500);
+    emailAddress     : String(100);
 
     asset_ID         : String(36); // Changed to match Assets.assetId type
     asset            : Association to one Assets on asset_ID = asset.ID;

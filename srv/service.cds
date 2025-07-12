@@ -12,9 +12,9 @@ service jouleSrv {
   @cds.redirection.target
  entity MaintenanceTasks as projection on db.MaintenanceTasks {
   *,
+  emailAddress,
   user_ID, // 👈 make sure this is explicitly listed
   user   // 👈 association for dropdown label (via @Common.Text)
-  emailAddress : String(255);
 }
 
 

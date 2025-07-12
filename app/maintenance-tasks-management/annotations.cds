@@ -30,6 +30,11 @@ annotate service.MaintenanceTasks with @(
                 $Type : 'UI.DataField',
                 Value : user_ID
             },
+            {
+                $Type : 'UI.DataField',
+                Label : 'Email Address',
+                Value : emailAddress
+            },
         ],
     },
     
