@@ -82,13 +82,6 @@ entity AssetMetrics : cuid, managed {
 
 // ————————————
 // === Analytical Aggregate View ===
-@Aggregation.ApplySupported.Transformations: [
-  'aggregate',
-  'groupby',
-  'filter',
-  'search'
-]
-@Aggregation.ApplySupported.PropertyRestrictions: true
 @Analytics.DataCategory: #DIMENSION
 @Analytics.AggregatedProperties: [
     { Property: operatingHours, AggregationMethod: 'sum' },
@@ -98,6 +91,7 @@ entity AssetMetrics : cuid, managed {
 ]
 @Aggregation.ApplySupported: {
     Transformations: [ 'aggregate', 'groupby', 'filter', 'search' ],
+    PropertyRestrictions: true
     PropertyRestrictions: true
 }
 view AssetMetricsAnalytics as

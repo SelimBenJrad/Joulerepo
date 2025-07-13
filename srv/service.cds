@@ -22,12 +22,12 @@ service jouleSrv {
 
  @odata.draft.enabled
 entity FailurePredictions as projection on db.FailurePredictions {
+  *,  // Include all fields, including ID
   analysisDate,
   failureProbability,
   algorithmUsed,
   asset,
-  asset_ID,
-   // 👈 explicitly include the foreign key
+  asset_ID
 };
 annotate jouleSrv.FailurePredictions with {
   asset @Common.Text: asset.name;
@@ -35,19 +35,19 @@ annotate jouleSrv.FailurePredictions with {
 
 @odata.draft.enabled
  entity Users as projection on db.Users {
-  ID,
-  fullName
+  *,  // Include all fields
+  maintenanceTasks: Association to many MaintenanceTasks
 };
 
+@cds.redirection.target
+@Analytics.AggregatedProperties: [
+  { Property: 'operatingHours', AggregationMethod: 'sum' },
+  { Property: 'temperature', AggregationMethod: 'avg' },
+  { Property: 'vibrationLevel', AggregationMethod: 'avg' },
+  { Property: 'PredictionConfidence', AggregationMethod: 'avg' }
+]
+entity AssetMetricsAnalyticsSet as projection on db.AssetMetricsAnalytics;
 }
- 
- @odata.draft.enabled
-  @cds.redirection.target
-  @Aggregation.ApplySupported: {
-    Transformations: ['aggregate', 'groupby', 'filter', 'search'],
-    PropertyRestrictions: true
-  }
-  @Analytics.AggregatedProperties: [
     { Property: 'operatingHours', AggregationMethod: 'sum' },
     { Property: 'temperature', AggregationMethod: 'avg' },
     { Property: 'vibrationLevel', AggregationMethod: 'avg' },
