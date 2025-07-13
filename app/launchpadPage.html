@@ -81,5 +81,30 @@
             });
         </script>
     </head>
-    <body class="sapUiBody" id="content"></body>
+    <body class="sapUiBody" id="content">
+      <script>
+        // Wait for the renderer to be ready, then inject the icon for Maintenance Tasks
+        sap.ui.getCore().attachInit(function() {
+          sap.ushell.Container.createRenderer("fiori2", true).then(function(oRenderer) {
+            oRenderer.placeAt('content');
+            // Wait for DOM to be ready
+            setTimeout(function() {
+              var tiles = document.querySelectorAll('[data-id]');
+              tiles.forEach(function(tile) {
+                if (tile.textContent.includes('Maintenance Tasks')) {
+                  var img = document.createElement('img');
+                  img.src = 'assets/maintenance-icon.svg';
+                  img.alt = 'Maintenance Icon';
+                  img.style.width = '32px';
+                  img.style.height = '32px';
+                  img.style.display = 'block';
+                  img.style.margin = '0 auto 8px auto';
+                  tile.insertBefore(img, tile.firstChild);
+                }
+              });
+            }, 1200);
+          });
+        });
+      </script>
+    </body>
 </html>
