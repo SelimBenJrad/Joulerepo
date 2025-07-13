@@ -72,5 +72,49 @@ annotate jouleSrv.Users with {
   };
 }
 
+  @odata.draft.enabled
+  @cds.redirection.target
+  entity Equipment as projection on db.Equipment;
+
+annotate jouleSrv.Equipment with @UI.HeaderInfo: {
+  TypeName: 'Equipment',
+  TypeNamePlural: 'Equipment',
+  Title: { Value: id }
+};
+
+annotate jouleSrv.Equipment with {
+  id @UI.Identification @Common.Text: { $value: id, TextArrangement: #TextOnly };
+  type @title: 'Type';
+  usageHours @title: 'Usage Hours';
+  ageYears @title: 'Age (Years)';
+  maintenanceCount @title: 'Maintenance Count';
+};
+
+annotate jouleSrv.Equipment with @UI.LineItem: [
+  { Value: id },
+  { Value: type },
+  { Value: usageHours },
+  { Value: ageYears },
+  { Value: maintenanceCount }
+];
+
+annotate jouleSrv.Equipment with @UI.FieldGroup #Main: {
+  $Type: 'UI.FieldGroupType',
+  Data: [
+    { Value: id },
+    { Value: type },
+    { Value: usageHours },
+    { Value: ageYears },
+    { Value: maintenanceCount }
+  ]
+};
+
+annotate jouleSrv.Equipment with @UI.Facets: [
+  { $Type: 'UI.ReferenceFacet', ID: 'Main', Label: 'General Information', Target: '@UI.FieldGroup#Main' }
+];
+
+annotate jouleSrv.Equipment with @UI.SelectionFields: [
+  id, type, ageYears
+];
 
 }

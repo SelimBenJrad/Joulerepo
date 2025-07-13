@@ -80,6 +80,15 @@ entity AssetMetrics : cuid, managed {
     asset            : Association to one Assets on asset_ID = asset.ID;
 }
 
+// New Equipment Entity
+entity Equipment : managed {
+    id                  : UUID;
+    type                 : String(50);              // e.g. "Laptop", "Machine", "Vehicle"
+    usageHours          : Integer;       // e.g. 1200
+    ageYears            : Integer;         // e.g. 5
+    maintenanceCount    : Integer; // e.g. 3
+}
+
 // ————————————
 // === Analytical Aggregate View ===
 
