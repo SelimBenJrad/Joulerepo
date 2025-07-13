@@ -43,6 +43,16 @@ annotate jouleSrv.FailurePredictions with {
  
  @odata.draft.enabled
   @cds.redirection.target
+  @Aggregation.ApplySupported: {
+    Transformations: ['aggregate', 'groupby', 'filter', 'search'],
+    PropertyRestrictions: true
+  }
+  @Analytics.AggregatedProperties: [
+    { Property: 'operatingHours', AggregationMethod: 'sum' },
+    { Property: 'temperature', AggregationMethod: 'avg' },
+    { Property: 'vibrationLevel', AggregationMethod: 'avg' },
+    { Property: 'PredictionConfidence', AggregationMethod: 'avg' }
+  ]
   entity AssetMetricsAnalyticsSet as projection on db.AssetMetricsAnalytics;
 
 annotate jouleSrv.MaintenanceTasks with @UI.FieldGroup #GeneralDetails : {

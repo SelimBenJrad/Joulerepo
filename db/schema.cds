@@ -89,21 +89,38 @@ entity AssetMetrics : cuid, managed {
   'search'
 ]
 @Aggregation.ApplySupported.PropertyRestrictions: true
+@Analytics.DataCategory: #DIMENSION
+@Analytics.AggregatedProperties: [
+    { Property: operatingHours, AggregationMethod: 'sum' },
+    { Property: temperature, AggregationMethod: 'avg' },
+    { Property: vibrationLevel, AggregationMethod: 'avg' },
+    { Property: PredictionConfidence, AggregationMethod: 'avg' }
+]
+@Aggregation.ApplySupported: {
+    Transformations: [ 'aggregate', 'groupby', 'filter', 'search' ],
+    PropertyRestrictions: true
+}
 view AssetMetricsAnalytics as
   select from AssetMetrics {
-    key asset_ID                          @(Aggregation.ContextDefiningProperties: []),
-    asset.name                            as assetName,
+    key asset_ID                          @Analytics.Dimension @(Aggregation.ContextDefiningProperties: []),
+    asset.name                            as assetName @Analytics.Dimension,
+    @Analytics.Dimension
     @(Aggregation.group: true)
     cast(year(recordedAt)  as Integer)    as recordedYear,
+    @Analytics.Dimension
     @(Aggregation.group: true)
-   cast(month(recordedAt) as Integer)    as recordedMonth,
-  // Measures
-  @(Aggregation.default: #SUM)
-  operatingHours,
-  @(Aggregation.default: #AVG)
-  temperature,
-  @(Aggregation.default: #AVG)
-  vibrationLevel,
-  @(Aggregation.default: #AVG)
-  PredictionConfidence
+    cast(month(recordedAt) as Integer)    as recordedMonth,
+    // Measures
+    @Analytics.Measure
+    @Aggregation.default: #SUM
+    operatingHours,
+    @Analytics.Measure
+    @Aggregation.default: #AVG
+    temperature,
+    @Analytics.Measure
+    @Aggregation.default: #AVG
+    vibrationLevel,
+    @Analytics.Measure
+    @Aggregation.default: #AVG
+    PredictionConfidence
 }
