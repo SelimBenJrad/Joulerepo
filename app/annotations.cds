@@ -93,10 +93,6 @@ annotate jouleSrv.MaintenanceTasks with @UI.SelectionFields: [
 ];
 
 annotate jouleSrv.MaintenanceTasks with {
-  user_ID @Common.Text: {
-    $value: user.fullName,
-    TextArrangement: #TextOnly
-  };
 };
 
 // === DEPRECIATION RECORDS ===

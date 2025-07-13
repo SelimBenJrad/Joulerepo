@@ -26,7 +26,6 @@ annotate service.MaintenanceTasks with @(
                 $Type : 'UI.DataField',
                 Value : technicianNotes,
             },
-            // user_ID field removed from FieldGroup
             {
                 $Type : 'UI.DataField',
                 Label : 'Email Address',

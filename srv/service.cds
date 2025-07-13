@@ -13,7 +13,6 @@ service jouleSrv {
  entity MaintenanceTasks as projection on db.MaintenanceTasks {
   *,
   emailAddress,
-  user_ID, // 👈 make sure this is explicitly listed
   user   // 👈 association for dropdown label (via @Common.Text)
 }
 
@@ -53,8 +52,7 @@ annotate jouleSrv.MaintenanceTasks with @UI.FieldGroup #GeneralDetails : {
     { Value: scheduledDate },
     { Value: completedDate },
     { Value: status },
-    { Value: technicianNotes },
-    { Value: user_ID } // 👈 ensures user dropdown shows
+    { Value: technicianNotes }
   ]
 };
 
