@@ -17,34 +17,89 @@
 <body id="body" class="sapUiBody">
     <script>
         "use strict";
-        sap.ui.localResources("assets");
-        (function (jQuery, App, Page) {
-            sap.ui.getCore().attachInit(function () {
-                sap.ui.define([
-                    "sap/ui/core/mvc/Controller",
-                    "sap/ui/model/json/JSONModel"
-                ], function (Controller, JSONModel) {
-                    return Controller.extend("PreviewController", {
-                        onInit: function () {
+        sap.ui.getCore().attachInit(function () {
+            // Minimal dashboard data (placeholder counts)
+            var dashboardData = {
+                Assets: 12,
+                MaintenanceTasks: 5,
+                DepreciationRecords: 8,
+                FailurePredictions: 3,
+                Users: 4,
+                AssetMetrics: 20
+            };
 
-                            const data = {"Services":[{"ServiceName":"jouleSrv","DetailsURL":"./odata/v4/joule-srv/","Metadata":"./odata/v4/joule-srv/$metadata","Entities":[{"Name":"Assets","URL":"./odata/v4/joule-srv/Assets","FioriURL":"$fiori-preview/jouleSrv/Assets#preview-app"},{"Name":"AssetMetrics","URL":"./odata/v4/joule-srv/AssetMetrics","FioriURL":"$fiori-preview/jouleSrv/AssetMetrics#preview-app"},{"Name":"MaintenanceTasks","URL":"./odata/v4/joule-srv/MaintenanceTasks","FioriURL":"$fiori-preview/jouleSrv/MaintenanceTasks#preview-app"},{"Name":"DepreciationRecords","URL":"./odata/v4/joule-srv/DepreciationRecords","FioriURL":"$fiori-preview/jouleSrv/DepreciationRecords#preview-app"},{"Name":"FailurePredictions","URL":"./odata/v4/joule-srv/FailurePredictions","FioriURL":"$fiori-preview/jouleSrv/FailurePredictions#preview-app"},{"Name":"Users","URL":"./odata/v4/joule-srv/Users","FioriURL":"$fiori-preview/jouleSrv/Users#preview-app"}],"EntitiesCount":6}]}
-                            this.getView().setModel(new JSONModel(data));
-                        }
-                    });
-                });
-                var oApp = new App()
-                var previewView = sap.ui.view({
-                    viewName: "assets.Preview",
-                    type: sap.ui.core.mvc.ViewType.XML
-                });
-                oApp.addPage(new Page({
-                    content: [previewView],
-                    showHeader: false
-                })).placeAt("content");
+            var dashboard = new sap.m.Panel({
+                headerText: "Dashboard",
+                content: [
+                    new sap.m.HBox({
+                        items: [
+                            new sap.m.Panel({
+                                headerText: "Assets",
+                                content: [new sap.m.Text({text: dashboardData.Assets})],
+                                width: "120px"
+                            }),
+                            new sap.m.Panel({
+                                headerText: "Maintenance Tasks",
+                                content: [new sap.m.Text({text: dashboardData.MaintenanceTasks})],
+                                width: "120px"
+                            }),
+                            new sap.m.Panel({
+                                headerText: "Depreciation Records",
+                                content: [new sap.m.Text({text: dashboardData.DepreciationRecords})],
+                                width: "120px"
+                            }),
+                            new sap.m.Panel({
+                                headerText: "Failure Predictions",
+                                content: [new sap.m.Text({text: dashboardData.FailurePredictions})],
+                                width: "120px"
+                            }),
+                            new sap.m.Panel({
+                                headerText: "Users",
+                                content: [new sap.m.Text({text: dashboardData.Users})],
+                                width: "120px"
+                            }),
+                            new sap.m.Panel({
+                                headerText: "Asset Metrics",
+                                content: [new sap.m.Text({text: dashboardData.AssetMetrics})],
+                                width: "120px"
+                            })
+                        ],
+                        alignItems: "Center",
+                        justifyContent: "Center"
+                    })
+                ],
+                expandable: false,
+                width: "100%",
+                styleClass: "sapUiResponsiveMargin"
             });
 
-        }(jQuery, sap.m.App, sap.m.Page));
+            dashboard.placeAt("dashboard-content");
+
+            // Existing preview code
+            sap.ui.localResources("assets");
+            sap.ui.define([
+                "sap/ui/core/mvc/Controller",
+                "sap/ui/model/json/JSONModel"
+            ], function (Controller, JSONModel) {
+                return Controller.extend("PreviewController", {
+                    onInit: function () {
+                        const data = {"Services":[{"ServiceName":"jouleSrv","DetailsURL":"./odata/v4/joule-srv/","Metadata":"./odata/v4/joule-srv/$metadata","Entities":[{"Name":"Assets","URL":"./odata/v4/joule-srv/Assets","FioriURL":"$fiori-preview/jouleSrv/Assets#preview-app"},{"Name":"AssetMetrics","URL":"./odata/v4/joule-srv/AssetMetrics","FioriURL":"$fiori-preview/jouleSrv/AssetMetrics#preview-app"},{"Name":"MaintenanceTasks","URL":"./odata/v4/joule-srv/MaintenanceTasks","FioriURL":"$fiori-preview/jouleSrv/MaintenanceTasks#preview-app"},{"Name":"DepreciationRecords","URL":"./odata/v4/joule-srv/DepreciationRecords","FioriURL":"$fiori-preview/jouleSrv/DepreciationRecords#preview-app"},{"Name":"FailurePredictions","URL":"./odata/v4/joule-srv/FailurePredictions","FioriURL":"$fiori-preview/jouleSrv/FailurePredictions#preview-app"},{"Name":"Users","URL":"./odata/v4/joule-srv/Users","FioriURL":"$fiori-preview/jouleSrv/Users#preview-app"}],"EntitiesCount":6}]}
+                        this.getView().setModel(new JSONModel(data));
+                    }
+                });
+            });
+            var oApp = new sap.m.App();
+            var previewView = sap.ui.view({
+                viewName: "assets.Preview",
+                type: sap.ui.core.mvc.ViewType.XML
+            });
+            oApp.addPage(new sap.m.Page({
+                content: [previewView],
+                showHeader: false
+            })).placeAt("content");
+        });
     </script>
+    <div id="dashboard-content" style="margin-bottom:2rem;"></div>
     <div id="content"></div>
 </body>
 
