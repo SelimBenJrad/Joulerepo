@@ -13,48 +13,7 @@
             secondTitle="Project Preview"
             homeIcon="assets/SAP_R_grad.svg">
     </f:ShellBar>
-
-    <!-- Minimal Dashboard Row -->
     <l:BlockLayout>
-        <l:BlockLayoutRow>
-            <l:BlockLayoutCell width="1">
-                <VBox alignItems="Center">
-                    <Title text="Assets"/>
-                    <Text text="{dashboard>Assets}"/>
-                </VBox>
-            </l:BlockLayoutCell>
-            <l:BlockLayoutCell width="1">
-                <VBox alignItems="Center">
-                    <Title text="Maintenance Tasks"/>
-                    <Text text="{dashboard>MaintenanceTasks}"/>
-                </VBox>
-            </l:BlockLayoutCell>
-            <l:BlockLayoutCell width="1">
-                <VBox alignItems="Center">
-                    <Title text="Depreciation Records"/>
-                    <Text text="{dashboard>DepreciationRecords}"/>
-                </VBox>
-            </l:BlockLayoutCell>
-            <l:BlockLayoutCell width="1">
-                <VBox alignItems="Center">
-                    <Title text="Failure Predictions"/>
-                    <Text text="{dashboard>FailurePredictions}"/>
-                </VBox>
-            </l:BlockLayoutCell>
-            <l:BlockLayoutCell width="1">
-                <VBox alignItems="Center">
-                    <Title text="Users"/>
-                    <Text text="{dashboard>Users}"/>
-                </VBox>
-            </l:BlockLayoutCell>
-            <l:BlockLayoutCell width="1">
-                <VBox alignItems="Center">
-                    <Title text="Asset Metrics"/>
-                    <Text text="{dashboard>AssetMetrics}"/>
-                </VBox>
-            </l:BlockLayoutCell>
-        </l:BlockLayoutRow>
-        <!-- Existing content below -->
         <l:BlockLayoutRow>
             <l:BlockLayoutCell
                 title="Joule"
@@ -80,7 +39,7 @@
                 </core:HTML>
             </l:BlockLayoutCell>
             <l:BlockLayoutCell>
-                <Title titleStyle="H3" text="Services (1)"/>
+                <Title titleStyle="H3" text="Services (0)"/>
                 <core:HTML 
                     content='&lt;hr class=&quot;servicesSeparator&quot;&gt;'>
                 </core:HTML>
@@ -91,7 +50,7 @@
                     enableColumnReordering="false"
                     columnHeaderVisible="false"
                     ariaLabelledBy="title"
-                    visibleRowCount="1"
+                    visibleRowCount="0"
                     class="transparentTable parentTable">
                     <table:columns>
                         <table:Column>

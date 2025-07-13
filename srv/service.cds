@@ -35,25 +35,9 @@ annotate jouleSrv.FailurePredictions with {
 
 @odata.draft.enabled
  entity Users as projection on db.Users {
-  *,  // Include all fields
-  maintenanceTasks: Association to many MaintenanceTasks
-};
-
-@cds.redirection.target
-@Analytics.AggregatedProperties: [
-  { Property: 'operatingHours', AggregationMethod: 'sum' },
-  { Property: 'temperature', AggregationMethod: 'avg' },
-  { Property: 'vibrationLevel', AggregationMethod: 'avg' },
-  { Property: 'PredictionConfidence', AggregationMethod: 'avg' }
-]
-entity AssetMetricsAnalyticsSet as projection on db.AssetMetricsAnalytics;
-}
-    { Property: 'operatingHours', AggregationMethod: 'sum' },
-    { Property: 'temperature', AggregationMethod: 'avg' },
-    { Property: 'vibrationLevel', AggregationMethod: 'avg' },
-    { Property: 'PredictionConfidence', AggregationMethod: 'avg' }
-  ]
-  entity AssetMetricsAnalyticsSet as projection on db.AssetMetricsAnalytics;
+  *,  
+  // Include all fields
+  };
 
 annotate jouleSrv.MaintenanceTasks with @UI.FieldGroup #GeneralDetails : {
   Data : [
@@ -89,3 +73,4 @@ annotate jouleSrv.Users with {
 }
 
 
+}

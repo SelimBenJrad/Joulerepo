@@ -82,18 +82,8 @@ entity AssetMetrics : cuid, managed {
 
 // ————————————
 // === Analytical Aggregate View ===
-@Analytics.DataCategory: #DIMENSION
-@Analytics.AggregatedProperties: [
-    { Property: operatingHours, AggregationMethod: 'sum' },
-    { Property: temperature, AggregationMethod: 'avg' },
-    { Property: vibrationLevel, AggregationMethod: 'avg' },
-    { Property: PredictionConfidence, AggregationMethod: 'avg' }
-]
-@Aggregation.ApplySupported: {
-    Transformations: [ 'aggregate', 'groupby', 'filter', 'search' ],
-    PropertyRestrictions: true
-    PropertyRestrictions: true
-}
+
+
 view AssetMetricsAnalytics as
   select from AssetMetrics {
     key asset_ID                          @Analytics.Dimension @(Aggregation.ContextDefiningProperties: []),
