@@ -12,7 +12,7 @@ def predict_failure_date():
     input_data = pd.DataFrame([data])  # ✅ FIX: Convert to DataFrame
     predicted_days = model.predict(input_data)[0]
     failure_date = datetime.now() + timedelta(days=int(predicted_days))
-    return jsonify({ "preditedFailureDate": failure_date.strftime("%Y-%m-%d") })
+    return jsonify({ "predictedFailureDate": failure_date.strftime("%Y-%m-%d") })
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
