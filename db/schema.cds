@@ -83,9 +83,10 @@ entity AssetMetrics : cuid, managed {
 // New Equipment Entity
 entity Equipment : cuid,managed {
     type                 : String(50);              // e.g. "Laptop", "Machine", "Vehicle"
-    usageHours          : Integer;       // e.g. 1200
-    ageYears            : Integer;         // e.g. 5
-    maintenanceCount    : Integer; // e.g. 3
+    usageHours           : Integer;       // e.g. 1200
+    ageYears             : Integer;         // e.g. 5
+    maintenanceCount     : Integer; // e.g. 3
+    PredictedFailureDate : Date; // Filled by API, not user input
 }
 
 // ————————————

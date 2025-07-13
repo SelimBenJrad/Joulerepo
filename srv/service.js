@@ -4,6 +4,7 @@
  */
 const LCAPApplicationService = require('@sap/low-code-event-handler');
 const maintenancetasks_Logic = require('./code/maintenancetasks-logic');
+const equipmentHandler = require('./equipment-service');
 class jouleSrv extends LCAPApplicationService {
     async init() {
         this.on(['CREATE', 'UPDATE'], 'MaintenanceTasks', async (request, next) => {
@@ -12,6 +13,8 @@ class jouleSrv extends LCAPApplicationService {
             
             return maintenancetasks_Logic(request, next);
         });
+        // Equipment API prediction logic
+        equipmentHandler.call(this);
         return super.init();
     }
 }
