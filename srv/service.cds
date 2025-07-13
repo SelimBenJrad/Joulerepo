@@ -13,7 +13,6 @@ service jouleSrv {
  entity MaintenanceTasks as projection on db.MaintenanceTasks {
   *,
   emailAddress,
-  user   // 👈 association for dropdown label (via @Common.Text)
 }
 
 
@@ -37,8 +36,7 @@ annotate jouleSrv.FailurePredictions with {
 @odata.draft.enabled
  entity Users as projection on db.Users {
   ID,
-  fullName,
-  maintenanceTasks
+  fullName
 };
 
 }

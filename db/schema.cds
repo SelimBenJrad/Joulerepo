@@ -31,8 +31,6 @@ entity MaintenanceTasks : cuid,managed {
 
     asset_ID         : String(36); // Changed to match Assets.assetId type
     asset            : Association to one Assets on asset_ID = asset.ID;
-    
-    // user_ID and user association removed
 }
 
 
@@ -67,7 +65,6 @@ entity Users:cuid {
     role         : Role;
     isActive     : Boolean default true;
     
-    maintenanceTasks : Association to many MaintenanceTasks on maintenanceTasks.user_ID = $self.ID;
 }
 // === ASSET METRICS (for time-series tracking) ===
 entity AssetMetrics : cuid, managed {

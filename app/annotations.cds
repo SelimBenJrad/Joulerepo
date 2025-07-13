@@ -85,7 +85,6 @@ annotate jouleSrv.MaintenanceTasks with @UI.LineItem: [
   { Value: status },
   { Value: technicianNotes },
   { Label: 'Asset Name', Value: asset.name },
-  { Label: 'User', Value: user.fullName }
 ];
 
 annotate jouleSrv.MaintenanceTasks with @UI.SelectionFields: [
@@ -152,16 +151,13 @@ annotate jouleSrv.FailurePredictions with @UI.SelectionFields: [
   predictionId, asset_ID
 ];
 annotate jouleSrv.MaintenanceTasks with {
-  user @Common.Label: 'Assigned User';
 };
 annotate jouleSrv.MaintenanceTasks with {
-  user @Common.Text: user.fullName ;
 };
 annotate jouleSrv.Users with {
   fullName @UI.Identification @Common.Text: { $value: fullName, TextArrangement: #TextOnly };
 };
 annotate jouleSrv.MaintenanceTasks with {
-  user_ID @Common.Text: { $value: user.fullName, TextArrangement: #TextOnly };
 };
 
 
