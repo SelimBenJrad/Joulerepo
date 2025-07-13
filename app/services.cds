@@ -16,3 +16,5 @@ using from './failure/annotations';
 using from './predective/annotations';
 
 using from './analytics/annotations';
+
+using from './equipement/annotations';

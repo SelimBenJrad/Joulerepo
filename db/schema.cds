@@ -81,8 +81,7 @@ entity AssetMetrics : cuid, managed {
 }
 
 // New Equipment Entity
-entity Equipment : managed {
-    id                  : UUID;
+entity Equipment : cuid,managed {
     type                 : String(50);              // e.g. "Laptop", "Machine", "Vehicle"
     usageHours          : Integer;       // e.g. 1200
     ageYears            : Integer;         // e.g. 5

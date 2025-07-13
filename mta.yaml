@@ -47,6 +47,10 @@ modules:
       - predective.zip
       name: predective
       target-path: resources/
+    - artifacts:
+      - equipement.zip
+      name: equipement
+      target-path: resources/
 - name: failure
   type: html5
   path: app/failure
@@ -70,6 +74,16 @@ modules:
 - name: predective
   type: html5
   path: app/predective
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: equipement
+  type: html5
+  path: app/equipement
   build-parameters:
     build-result: dist
     builder: custom
