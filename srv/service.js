@@ -8,11 +8,14 @@ const equipmentHandler = require('./equipment-service');
 class jouleSrv extends LCAPApplicationService {
     async init() {
         this.on(['CREATE', 'UPDATE'], 'MaintenanceTasks', async (request, next) => {
-
-            
-            
             return maintenancetasks_Logic(request, next);
         });
+
+        // Rapport handler to log text before save/update
+        this.before(['CREATE', 'UPDATE'], 'Rapport', async (request) => {
+            console.log('Rapport text to be saved:', request.data.text);
+        });
+
         // Equipment API prediction logic
         equipmentHandler.call(this);
         return super.init();
