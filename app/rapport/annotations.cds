@@ -12,6 +12,7 @@ annotate service.Rapport with @(
                 $Type : 'UI.DataField',
                 Label : 'text',
                 Value : text,
+                ![@UI.MultiLineText]
             },
         ],
     },
