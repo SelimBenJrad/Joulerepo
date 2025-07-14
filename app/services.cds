@@ -18,3 +18,5 @@ using from './predective/annotations';
 using from './analytics/annotations';
 
 using from './equipement/annotations';
+
+using from './rapport/annotations';

@@ -54,7 +54,8 @@
     "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
     "watch-metrics": "cds watch --open metrics/webapp/index.html?sap-ui-xx-viewCache=false",
     "watch-predective": "cds watch --open predective/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-equipement": "cds watch --open equipement/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-equipement": "cds watch --open equipement/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-rapport": "cds watch --open rapport/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -82,6 +83,7 @@
     "app/failure",
     "app/metrics",
     "app/predective",
-    "app/equipement"
+    "app/equipement",
+    "app/rapport"
   ]
 }

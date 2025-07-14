@@ -89,6 +89,10 @@ entity Equipment : cuid,managed {
     PredictedFailureDate : Date; // Filled by API, not user input
 }
 
+entity Rapport : cuid,managed {
+    author:String;
+    text                 : String;              
+}
 // ————————————
 // === Analytical Aggregate View ===
 

@@ -15,6 +15,9 @@ service jouleSrv {
   emailAddress,
 }
 
+@cds.redirection.target
+  @odata.draft.enabled
+  entity Rapport as projection on db.Rapport;
 
 @cds.redirection.target
   @odata.draft.enabled

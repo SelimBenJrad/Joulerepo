@@ -51,6 +51,10 @@ modules:
       - equipement.zip
       name: equipement
       target-path: resources/
+    - artifacts:
+      - rapportrapport.zip
+      name: rapportrapport
+      target-path: resources/
 - name: failure
   type: html5
   path: app/failure
@@ -84,6 +88,16 @@ modules:
 - name: equipement
   type: html5
   path: app/equipement
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: rapportrapport
+  type: html5
+  path: app/rapport
   build-parameters:
     build-result: dist
     builder: custom
