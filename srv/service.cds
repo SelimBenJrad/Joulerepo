@@ -95,7 +95,8 @@ annotate jouleSrv.Equipment with @UI.LineItem: [
   { Value: type },
   { Value: usageHours },
   { Value: ageYears },
-  { Value: maintenanceCount }
+  { Value: maintenanceCount },
+  { Value: PredictedFailureDate, Criticality: #Negative, CriticalityRepresentation: #WithIcon }
 ];
 
 annotate jouleSrv.Equipment with @UI.FieldGroup #Main: {
